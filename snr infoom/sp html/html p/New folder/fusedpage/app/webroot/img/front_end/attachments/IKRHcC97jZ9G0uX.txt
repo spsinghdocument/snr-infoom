@@ -1,0 +1,37 @@
+Visa Card: 4012888888881881
+ 
+Cvv: 000
+
+
+
+4012888888881881
+
+000
+
+
+
+
+make free/ textarea for membership on membership page ++DONE
+
+Manage the messages for premium+ in admin panel and functionality of granting the premium+ membership
+
+validate if buisness claimed by a user, cannot be claimed by another user ++DONE
+
+One business can be claimed by one user ++DONE
+
+set feedback section ++DONE
+
+Fix Business About Us ++DONE
+
+make business editable
+Upgrade option for membership expiry
+
+
++++++++++++++25 April
+
+
+
+
+1.Business Contact Us section set as per the client
+2. Chnaged the Listing Page
+3. 

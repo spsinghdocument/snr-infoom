@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<form > 
+name :
+<input type="text" name="name of person" size="35">
+<br>
+address: 
+<input type="text" name="address of person" size="30">
+<br>
+contact no.:
+<input type="text" name="contact no. of person" size="11">
+country:
+<input type="text" name="country" value="india" size="15">
+</form>
+
+</body>
+</html>

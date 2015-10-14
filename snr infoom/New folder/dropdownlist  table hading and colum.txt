@@ -1,0 +1,60 @@
+ protected void Page_Load(object sender, EventArgs e)
+    .............................
+    {
+        if (!IsPostBack)
+        {
+            Calendar1.Visible = false;
+            SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\saurabh.mdf;Integrated Security=True;User Instance=True");
+            SqlCommand cmd = new SqlCommand();
+            con.Open();
+            cmd = new SqlCommand("select * from sp", con);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            da.Fill(ds);
+
+
+
+            for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
+            {
+
+                DropDownList1.Items.Add(ds.Tables[0].Columns[i].ColumnName);
+            }
+        }
+
+    }
+.................................................................................................................................................................
+
+ protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+              ...............................
+    {
+        DropDownList2.Items.Clear();
+        SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\saurabh.mdf;Integrated Security=True;User Instance=True");
+        SqlCommand cmd = new SqlCommand();
+        con.Open();
+        string str = "select " + DropDownList1.SelectedItem.ToString() + " from sp";
+        cmd = new SqlCommand(str, con);
+
+
+
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        cmd.ExecuteNonQuery();
+
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+
+
+        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+        {
+           
+            DropDownList2.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+
+        }
+
+
+
+        con.Close();
+       
+    }

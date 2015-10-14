@@ -1,0 +1,11 @@
+<html>
+<body>
+<p align="center"><b>click on the image to link to google</b></p>
+<a href="http://www.google.com/">
+<img src="dogs.jpg" width="100"height="70">
+</a><br><br><br><br>
+<a href="http://www.google.com/">
+<img src="dogs.jpg" width="100"height="70"border="0">
+</a>
+</body>
+</html>

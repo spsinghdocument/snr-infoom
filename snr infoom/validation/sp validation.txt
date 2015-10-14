@@ -1,0 +1,57 @@
+causesValidation false    ( NOT USE bution validation )
+
+...............................................................
+
+
+
+
+
+number   
+
+^[0-9]{10}
+.................................................
+
+name
+^[a-zA_Z'.\s]{1,20}
+
+ ^[a-zA-Z]{7,10}$
+
+^[a-z][A-Z]
+..........................................................
+
+email
+
+ragularExpression validator......properties....validationExprerrior...custom...inter email
+.............................................................
+all filed full
+
+raquiredFieldValidator......ERROR Massage.......ForColor...controlTo Valid
+      
+            OR
+Label ko flse kro
+
+  if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && RadioButtonList1.Text != "" && DropDownList1.SelectedItem.Text != "")
+
+{
+  }
+        else
+        {
+            Label1.Visible = true;
+
+            Label1.Text = "<font color ='Green'> plese fill all"+  Button2.AccessKey  + "</font>";
+        }
+
+.................................................................................................
+
+dropDownList
+
+.....Select one.....
+raquiredFieldValidator......ERROR Massage.......ForColor...controlTo Valid.....INITIALVALUE(copy).....Select one.....
+
+...................................................................................................................................................................................................
+
+REENTRR PASSWORD
+
+2 TEXTBOX  KO  ( TEXTMODE ....PASSWORD)
+
+COMPAREVALIDATOR............ERROR Massage.......ForColor.. COTROLTOCOMPARE...TextBox7.....COTROLTOVALIDATE....TextBox8

@@ -1,0 +1,27 @@
+ protected void Button1_Click(object sender, EventArgs e)
+               ..............  
+    {
+
+  
+        Server.Transfer("~/Default3.aspx", false);
+        
+    }
+
+
+.............................second page per (  protected void Page_Load(object sender, EventArgs e) )............................
+
+
+
+
+ Page previous = Page.PreviousPage;
+        if (previous != null)
+        {
+            Label1.Text = ((TextBox)previous.FindControl("TextBox1")).Text;
+            TextBox1.Text = ((TextBox)previous.FindControl("TextBox1")).Text;
+            Label2.Text = ((DropDownList)previous.FindControl("DropDownList1")).Text;
+            TextBox2.Text = ((RadioButtonList)previous.FindControl("RadioButtonList1")).Text;
+
+
+
+            TextBox3.Text = ((Label)previous.FindControl("Label1")).Text;
+      }

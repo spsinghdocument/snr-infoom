@@ -1,0 +1,15 @@
+ protected void Button1_Click(object sender, EventArgs e)
+    {
+        string email = TextBox1.Text;
+        if (email.IndexOf("@") == -1 || email.IndexOf(".") == -1)
+        {
+            Label1.Visible = true;
+            Label1.Text = "invalid email address";
+        }
+
+        else
+        {
+            Label1.Visible = true;
+            Label1.Text = "valid email address.";
+        }
+    }

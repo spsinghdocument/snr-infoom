@@ -1,0 +1,556 @@
+<?php
+App::uses('AppController', 'Controller');
+/**
+ * BusinessDeals Controller
+ *
+ * @property BusinessDeal $BusinessDeal
+ */
+class BusinessDealsController extends AppController {
+	public $name = 'BusinessDeals';	
+	public $helpers = array('Html', 'Form', 'Session', 'Text', 'Image');
+	public $components = array('Session', 'Email', 'Auth', 'Location', 'Fp');
+
+	public $wallUrl = '/users/dashboard/';
+
+	//BEFORE FILTER STARTS
+	function beforeFilter(){
+		parent::beforeFilter();
+		if(!empty($this->Auth))
+			$this->Auth->allowedActions = array('fetch_business_deals', 'fetch_business_deals_details');
+	}
+	//BEFORE FILTER ENDS
+
+	/*---------------------------- FRONT SECTION START ----------------------------------------*/
+	//FUNCTION FOR FETCHING THE DEALS FOR LISTING START
+	public function fetch_business_deals(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+
+		$ret = '';
+		$this->BusinessDeal->recursive = -1;
+		/*$businessDealsArr = $this->BusinessDeal->find('all', array('conditions'=>array('BusinessDeal.business_id'=>$_POST['business_id'], 'BusinessDeal.status'=>'1'), 'limit'=>PAGING_SIZE, 'order'=>array('BusinessDeal.id'=>'DESC'))); */
+
+		$businessDealsArr = $this->BusinessDeal->find('all', array('conditions'=>array('BusinessDeal.business_id'=>$_POST['business_id'], 'BusinessDeal.status'=>'1', 'OR'=>array('DATE(BusinessDeal.end_date) >='=>date('Y-m-d'), 'DATE(BusinessDeal.end_date)'=>'0000-00-00', 'BusinessDeal.end_date IS NULL')), 'limit'=>PAGING_SIZE, 'order'=>array('BusinessDeal.id'=>'DESC')));
+
+
+
+		if(!empty($businessDealsArr))
+			$ret = $businessDealsArr; //pr($ret);die;
+		$this->set('dealsArr', $ret);
+	}
+	//FUNCTION FOR FETCHING THE DEALS FOR LISTING END
+
+	//FUNCTION FOR FETCHING THE ADD DEALS FORM START
+	public function fetch_add_deals_form(){ //pr($_POST); die;
+		$this->layout = 'ajax';
+	}
+	//FUNCTION FOR FETCHING THE ADD DEALS FORM END
+
+	//FUNCTION FOR UPLOADING THE IMAGE START
+	public function upload_image(){ //pr($_FILES);die;
+		$this->layout = 'ajax';
+		$ret = '';
+
+		if($_FILES['image']['name'] != ''){
+			$file_name = $this->Fp->uploadFile('../webroot/img/front_end/business/deals/', $_FILES['image']);
+			if($file_name != '')
+				$ret = $file_name;
+		}
+		echo $ret;
+		exit;
+	}
+	//FUNCTION FOR UPLOADING THE IMAGE END
+
+	public function edit_image(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+
+		$ret = '';
+		//upload the new image
+		if($_FILES['image']['name'] != ''){
+			$file_name = $this->Fp->uploadFile('../webroot/img/front_end/business/deals/', $_FILES['image']);
+			if($file_name != '')
+				$ret = $file_name;
+		}
+
+		//delete the old image
+		if($ret != ''){
+			if($_POST['old_image'] != ''){
+				$oldImagePath = '../webroot/img/front_end/business/deals/'.$_POST['old_image'];
+				if(is_file($oldImagePath))
+					unlink($oldImagePath);
+			}
+		}
+
+		echo $ret;
+		die;
+	}
+
+	//FUNCTION FOR ADDING A DEAL START
+	public function add_deals_data(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+		Controller::loadModel('BusinessRecommend');
+		Controller::loadModel('BusinessSubscriber');
+		Controller::loadModel('User');
+		Controller::loadModel('Business');
+
+		$saveData['business_id'] = $_POST['business_id'];
+		$saveData['title'] = $_POST['BusinessDealTitle'];
+		$saveData['price'] = $_POST['BusinessDealPrice'];
+		$saveData['tagline'] = $_POST['BusinessDealTagline'];
+		$saveData['description'] = $_POST['BusinessDealDescription'];
+		$saveData['image'] = $_POST['BusinessDealImage'];
+		$saveData['start_date'] = $_POST['BusinessDealStartDate'];
+		$saveData['end_date'] = $_POST['BusinessDealEndDate'];
+		$saveData['fine_prints'] = $_POST['BusinessDealFinePrints'];
+		$saveData['high_lights'] = $_POST['BusinessDealHighLights'];
+		$saveData['status'] ='1';
+
+		if($this->BusinessDeal->save($saveData)){
+			echo 'saved';
+			$busiRes_id[] = '';
+			$busiSubs_id[] = '';
+
+			$busiResArr = $this->BusinessRecommend->find('all', array('fields'=>array('BusinessRecommend.user_id'), 'conditions'=>array('BusinessRecommend.business_id'=>$_POST['business_id'])));
+
+			$busiSubsArr = $this->BusinessSubscriber->find('all', array('fields'=>array('BusinessSubscriber.user_id'), 'conditions'=>array('BusinessSubscriber.business_id'=>$_POST['business_id'])));
+
+			if(!empty($busiResArr)){
+				foreach($busiResArr as $busiRes){
+					$busiRes_id[] = $busiRes['BusinessRecommend']['user_id'];
+				}
+			}
+
+			if(!empty($busiSubsArr)){
+				foreach($busiSubsArr as $busiSubs){
+					$busiSubs_id[] = $busiSubs['BusinessSubscriber']['user_id'];
+				}
+			}
+			$user_id = array_merge($busiRes_id, $busiSubs_id);
+			$email_user_id = array_unique($user_id);
+			
+			$useremail = $this->User->find('list', array('fields'=>array('User.email', 'User.email'), 'conditions'=>array('User.id'=>$email_user_id, 'User.status'=>'1')));
+			foreach($useremail as $subscriber){ //echo $subscriber;die;
+				$user_name = $this->User->find('first', array('fields'=>array('User.first_name', 'User.last_name'), 'conditions'=>array('User.email'=>$subscriber)));
+				$business_name = $this->Business->find('first', array('fields'=>array('Business.title'), 'conditions'=>array('Business.id'=>$_POST['business_id'])));
+					$this->set('businessname', $business_name['Business']['title']);
+					$this->set('username', $user_name['User']['first_name'].' '.$user_name['User']['first_name']);
+					$this->set('deal', $_POST['BusinessDealTitle']);
+					//Send Email
+					//$this->Email->to	   = $subscriber;
+					$this->Email->to	   = 'saurabh_kumar@seologistics.com';
+					$this->Email->from	   = EMAIL_ADMIN_FROM;
+					$this->Email->subject  = 'Business Deal Subscribers';
+					$this->Email->template = 'front_end/business_deal_add';
+					$this->Email->sendAs   = 'html'; 
+					$this->Email->send();
+				}
+
+				/* EMAIL FOR ADMIN START */
+				$adminArr = $this->Admin->find('first', array('conditions'=>array('Admin.id'=>'1')));
+				$business_name = $this->Business->find('first', array('fields'=>array('Business.title'), 'conditions'=>array('Business.id'=>$_POST['business_id'])));
+					$this->set('businessname', $business_name['Business']['title']);
+				$this->set('deal', $_POST['BusinessDealTitle']);
+				$this->set('username', $adminArr['Admin']['username']);
+				//$this->Email->to	   = $adminArr['Admin']['email'];
+				$this->Email->to	   = 'saurabh_kumar@seologistics.com';
+				$this->Email->from	   = EMAIL_ADMIN_FROM;
+				$this->Email->subject  = 'New Deal Added';
+				$this->Email->template = 'admin/business_offer_add';
+				$this->Email->sendAs   = 'html'; 
+				$this->Email->send();
+				/* EMAIL FOR ADMIN END */
+		}else{
+			echo '<font color="red">Please Try Later</font>';
+		}
+		exit;
+	}
+	//FUNCTION FOR ADDING A DEAL END
+
+	//FUNCTION FOR EDITING A DEAL START
+	public function fetch_edit_deals_form(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+		
+		$this->BusinessDeal->recursive = -1;
+		$businessArr = $this->BusinessDeal->findById($_POST['id']);
+		if(!empty($businessArr))
+			$this->set('businessArr', $businessArr);
+		else{
+			echo '<font color="red">Invalid Selection!!</font>';
+			die;
+		}		
+	}
+	//FUNCTION FOR EDITING A DEAL END
+
+	//FUNCTION FOR EDITING A DEAL START
+	public function edit_deals_data(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+		Controller::loadModel('BusinessRecommend');
+		Controller::loadModel('BusinessSubscriber');
+		Controller::loadModel('User');
+		Controller::loadModel('Business');
+
+		$saveData['id'] = $_POST['BusinessDealId'];
+		$saveData['title'] = $_POST['BusinessDealTitle'];
+		$saveData['price'] = $_POST['BusinessDealPrice'];
+		$saveData['tagline'] = $_POST['BusinessDealTagline'];
+		$saveData['description'] = $_POST['BusinessDealDescription'];
+		$saveData['image'] = $_POST['BusinessDealImage'];
+		$saveData['start_date'] = $_POST['BusinessDealStartDate'];
+		$saveData['end_date'] = $_POST['BusinessDealEndDate'];
+		$saveData['fine_prints'] = $_POST['BusinessDealFinePrints'];
+		$saveData['high_lights'] = $_POST['BusinessDealHighLights'];
+		$saveData['status'] ='1'; //pr($saveData);die;
+
+		if($this->BusinessDeal->save($saveData)){
+			echo 'saved';
+			$busiRes_id[] = '';
+				$busiSubs_id[] = '';
+			$businessArr = $this->BusinessDeal->find('first', array('conditions'=>array('BusinessDeal.id'=>$_POST['BusinessDealId'])));
+			$business_id = $businessArr['BusinessDeal']['business_id'];
+
+			$busiResArr = $this->BusinessRecommend->find('all', array('fields'=>array('BusinessRecommend.user_id'), 'conditions'=>array('BusinessRecommend.business_id'=>$business_id)));
+
+			$busiSubsArr = $this->BusinessSubscriber->find('all', array('fields'=>array('BusinessSubscriber.user_id'), 'conditions'=>array('BusinessSubscriber.business_id'=>$business_id)));
+
+			if(!empty($busiResArr)){
+				foreach($busiResArr as $busiRes){
+					$busiRes_id[] = $busiRes['BusinessRecommend']['user_id'];
+				}
+			}
+
+			if(!empty($busiSubsArr)){
+				foreach($busiSubsArr as $busiSubs){
+					$busiSubs_id[] = $busiSubs['BusinessSubscriber']['user_id'];
+				}
+			}
+			$user_id = array_merge($busiRes_id, $busiSubs_id);
+			$email_user_id = array_unique($user_id);
+			
+			$useremail = $this->User->find('list', array('fields'=>array('User.email', 'User.email'), 'conditions'=>array('User.id'=>$email_user_id, 'User.status'=>'1')));
+			foreach($useremail as $subscriber){ //echo $subscriber;die;
+				$user_name = $this->User->find('first', array('fields'=>array('User.first_name', 'User.last_name'), 'conditions'=>array('User.email'=>$subscriber)));
+				$business_name = $this->Business->find('first', array('fields'=>array('Business.title'), 'conditions'=>array('Business.id'=>$business_id)));
+				
+					$this->set('businessname', $business_name['Business']['title']);
+					$this->set('username', $user_name['User']['first_name'].' '.$user_name['User']['first_name']);
+					$this->set('deal', $_POST['BusinessDealTitle']);
+					//Send Email
+					$this->Email->to	   = $subscriber;
+					//$this->Email->to	   = 'saurabh_kumar@seologistics.com';
+					$this->Email->from	   = EMAIL_ADMIN_FROM;
+					$this->Email->subject  = 'Business Offer Subscribers';
+					$this->Email->template = 'front_end/business_deal_edit';
+					$this->Email->sendAs   = 'html'; 
+					$this->Email->send();
+				}
+				/* EMAIL FOR ADMIN START */
+				$adminArr = $this->Admin->find('first', array('conditions'=>array('Admin.id'=>'1')));
+				$business_name = $this->Business->find('first', array('fields'=>array('Business.title'), 'conditions'=>array('Business.id'=>$business_id)));
+				$this->set('businessname', $business_name['Business']['title']);
+				$this->set('deal', $_POST['BusinessDealTitle']);
+				$this->set('username', $adminArr['Admin']['username']);
+				//$this->Email->to	   = $adminArr['Admin']['email'];
+				$this->Email->to	   = 'saurabh_kumar@seologistics.com';
+				$this->Email->from	   = EMAIL_ADMIN_FROM;
+				$this->Email->subject  = 'New Deal Added';
+				$this->Email->template = 'admin/business_deal_edit';
+				$this->Email->sendAs   = 'html'; 
+				$this->Email->send();
+				/* EMAIL FOR ADMIN END */
+		}else{
+			echo '<font color="red">Please Try Later</font>';
+		}
+		exit;
+	}
+	//FUNCTION FOR EDITING A DEAL END
+
+	//FUNCTION FOR DELETING A BUSINESS DEAL START
+	public function delete_deal(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+
+		$this->BusinessDeal->recursive = -1;
+		$offerArr = $this->BusinessDeal->findById($_POST['id']);
+		if(!empty($offerArr)){
+			//delete the image
+			if($offerArr['BusinessDeal']['image'] != ''){
+				$imagePath = '../webroot/img/front_end/business/deals/'.$offerArr['BusinessDeal']['image'];
+				if(is_file($imagePath))
+					unlink($imagePath);
+			}
+
+			//delete the record
+			if($this->BusinessDeal->delete($_POST['id']))
+				echo 'deleted';
+			else
+				echo '';
+		}else
+			echo '';
+		exit;
+	}
+	//FUNCTION FOR DELETING A BUSINESS DEAL START
+
+
+	/***** FOR COMMENT AND RECOMMENDED START *****/
+	//FUNCTION FOR SAVE OFFER COMMENTS START(SAURABH 5/13/2013)
+	function saveComment(){
+		Controller::loadModel('DealComment');
+		$this->layout = 'ajax';
+		$user_id = $_POST['user_id'];
+		$deal_id = $_POST['deal_id'];
+		$comment = $_POST['comment'];
+
+		$saveData['user_id'] = $user_id;
+		$saveData['deal_id'] = $deal_id;
+		$saveData['comment'] = $comment;
+		$saveData['status'] = '1';
+		$this->DealComment->save($saveData);
+
+		$this->set('comment', $comment);
+
+		$last_id = $this->DealComment->id;
+		$commentArr = $this->DealComment->find('first', array('DealComment.id'=>$last_id));
+		$this->set('commentArr', $commentArr);
+		$userr_id = $commentArr['DealComment']['user_id'];
+		$this->set('userr_id', $userr_id);
+		$this->set('last_id', $last_id);
+	}
+	//FUNCTION FOR SAVE OFFER COMMENTS END(SAURABH 5/13/2013)
+
+	//FUNCTION FOR DELETE OFFER COMMENT START(SAURABH 5/9/2013)
+	function delete_deal_comment(){
+		Controller::loadModel('DealComment'); 
+		$this->layout = 'ajax';
+		$comment_id = $_POST['comment_id'];
+
+		if($this->DealComment->delete($comment_id)){
+			echo 'deleted';
+		}
+		exit;
+	}
+	//FUNCTION FOR DELETE OFFER COMMENT END(SAURABH 5/9/2013)
+
+
+	//FUNCTION FOR ADD RECOMMENDE FOR START(SAURABH 5/10/2013)
+	function add_recommended(){
+		Controller::loadModel('DealRecommended');
+		$this->layout = 'ajax';
+		$saveData['deal_id'] = $_POST['deal_id'];
+		$saveData['user_id'] = $_POST['user_id'];
+		$saveData['status'] = '1';
+
+		$this->DealRecommended->save($saveData);
+
+		$last_id = $this->DealRecommended->id;
+		$recArr = $this->DealRecommended->find('first', array('conditions'=>array('DealRecommended.id'=>$last_id)));
+		$deal_id = $recArr['DealRecommended']['deal_id'];
+			
+		$CountRecommended = $this->DealRecommended->find('count', array('conditions'=>array('DealRecommended.deal_id'=>$deal_id, 'DealRecommended.status'=>'1')));
+		//$this->set('CountRecommended', $CountRecommended);
+		echo $CountRecommended.' person has recommended';
+		exit;
+	}
+	//FUNCTION FOR ADD RECOMMENDED FOR OFFER END (SAURABH 5/10/2013)
+
+	//FUNCTION FOR FETCH USER IMAGE FOR OFFER START(SAURABh 5/10/2013)
+	function fetch_user_image(){
+		Controller::loadModel('DealRecommended');
+		$this->layout = 'ajax';
+		$deal_id = $_POST['deal_id'];
+		$user_id = $_POST['user_id'];
+
+		$userImage = $this->DealRecommended->find('first', array('conditions'=>array('DealRecommended.deal_id'=>$deal_id, 'DealRecommended.user_id'=>$user_id)));
+		$this->set('userImage', $userImage);
+	}
+	//FUNCTION FOR FETCH USER IMAGE FOR OFFER START(SAURABh 5/10/2013)
+	/***** FOR COMMENT AND RECOMMENDED END *****/
+
+	//SECTION FOR RATING START
+	public function set_total_rating(){ //pr($_POST);die;
+		Controller::loadModel('OffersDealsRating');
+		$this->layout = false;
+		$this->render = false;
+
+		$id = $_POST['id'];
+		$new_rating = $_POST['rating'];
+
+		$preRatingArr = $this->BusinessDeal->find('first', array('fields'=>array('BusinessDeal.rating'), 'conditions'=>array('BusinessDeal.id'=>$id)));
+		$prev_rating = (float)$preRatingArr['BusinessDeal']['rating'];
+
+		if($prev_rating != 0){
+			$newRating = round((($new_rating + $prev_rating)/2), 1);
+			if($newRating > 5){
+				$newRating = 5;
+			}
+		}else{
+			$newRating = $new_rating;
+		}
+		
+		// update the overall rating for business
+		$saveOfferRatingData['id'] = $id;
+		$saveOfferRatingData['rating'] = $new_rating;
+		$this->BusinessDeal->save($saveOfferRatingData, false);
+
+		//save the new rating value in business rating table
+		$saveRatingsData['deal_id'] = $id;
+		$saveRatingsData['user_id'] = $this->Session->read('Auth.User.User.id');
+		$saveRatingsData['rating'] = $_POST['rating'];
+		$this->OffersDealsRating->save($saveRatingsData, false);
+		exit;
+	}
+	//SECTION FOR RATING END
+	/*---------------------------- FRONT SECTION END ----------------------------------------*/
+
+	/*---------------------------- ADMIN SECTION START --------------------------------------*/
+	//FUNCTION FOR MANAGING THE DEALS START
+	public function admin_manage($business_id){
+		if($business_id != ''){
+			$this->BusinessDeal->recursive = -1;
+			$this->paginate = array('conditions'=>array('BusinessDeal.business_id'=>$business_id), 'limit'=>PAGING_SIZE, 'order'=>array('BusinessDeal.id'=>'DESC'));
+			$this->set('viewListing', $this->paginate('BusinessDeal'));
+		}else
+			$this->redirect('/admin/businesses/manage/');
+	}
+	//FUNCTION FOR MANAGING THE DEALS END
+
+	//FUNCTION FOR MANAGING THE STATUS START
+	public function admin_status_update($business_id, $id, $newStatus){
+		if($id != ''){
+			$pageCount = $this->BusinessDeal->find('count', array('conditions'=>array('BusinessDeal.id'=>$id)));
+			if($pageCount > 0){
+				$saveData['id'] = $id;
+				$saveData['status'] = $newStatus;
+				if($newStatus == '1')
+					$message = 'Activated';
+				else
+					$message = 'Deactivated';
+				if($this->BusinessDeal->save($saveData, false))
+					$this->Session->setFlash(__('Deal '.$message.' Successfully!!', true), 'message', array('class'=>'message-green'));
+				else
+					$this->Session->setFlash(__('No Associated Deal Found!!', true), 'message', array('class'=>'message-red'));
+			}else
+				$this->Session->setFlash(__('No Associated Deal Found!!', true), 'message', array('class'=>'message-red'));
+		}else
+			$this->Session->setFlash(__('No Associated Deal Found!!', true), 'message', array('class'=>'message-red'));
+		$this->redirect('/admin/business_deals/manage/'.$business_id.'/');
+		exit;
+	}
+	//FUNCTION FOR MANAGING THE STATUS END
+
+	//FUNCTION FOR VIEWING THE DEAL START
+	public function admin_view($id){
+		$this->layout = 'FancyBox/fancy_box_popup';
+		$this->set('dealArr', $this->BusinessDeal->findById($id));
+	}
+	//FUNCTION FOR VIEWING THE DEAL END
+
+	//FUNCTION FOR DELETING THE DEAL START
+	public function admin_delete($business_id, $delete_id){
+		$this->BusinessDeal->recursive = -1;
+		$offerArr = $this->BusinessDeal->findById($delete_id);
+		if(!empty($offerArr)){
+			//delete the image
+			if($offerArr['BusinessDeal']['image'] != ''){
+				$imageRealPath = '../webroot/img/front_end/business/deals/'.$offerArr['BusinessDeal']['image'];
+				if(is_file($imageRealPath))
+					unlink($imageRealPath);
+			}
+
+			//delete the record from table
+			if($this->BusinessDeal->delete($offerArr['BusinessDeal']['id']))
+				$this->Session->setFlash(__('Deal Deleted Successfully!!', true), 'message', array('class'=>'message-green'));
+			else
+				$this->Session->setFlash(__('Please Try Later!!', true), 'message', array('class'=>'message-red'));
+			$this->redirect('/admin/business_deals/manage/'.$business_id.'/');
+		}else
+			$this->redirect('/admin/business_deals/manage/'.$business_id.'/');
+		exit;
+	}
+	//FUNCTION FOR DELETING THE DEAL END
+
+	//FUNCTION FOR EDITING A OFFER START
+	public function admin_edit($business_id, $deal_id){
+		if(!empty($this->request->data)){ //pr($this->request->data);die;
+			$allowed_types = unserialize(ALLOWED_IMAGE_TYPES);
+			$continue = 'true';
+			$logoName = '';
+
+			//upload the image
+			if($this->request->data['BusinessDeal']['image_1']['name'] != ''){
+				if(in_array($this->request->data['BusinessDeal']['image_1']['type'], $allowed_types)){
+					$fileName = $this->Fp->uploadFile('../webroot/img/front_end/business/deals/', $this->request->data['BusinessDeal']['image_1']);
+					if($fileName != ''){
+						//delete the old file start
+						if($this->request->data['BusinessDeal']['old_image'] != ''){
+							$realImagePath = '../webroot/img/front_end/business/deals/'.$this->request->data['BusinessDeal']['old_image'];
+							if(is_file($realImagePath))
+								unlink($realImagePath);
+						}
+						//delete the old file end
+						$this->request->data['BusinessDeal']['image'] = $fileName;
+					}
+				}else{
+					$this->Session->setFlash(__('Please Upload only *.gif, *.jpg, *.png image only!', true), 'message', array('class'=>'message-red'));
+					$continue = 'false';
+				}
+			}
+			
+
+			//continue to save the data
+			if($continue == 'true'){
+				if($this->BusinessDeal->save($this->request->data))
+					$this->Session->setFlash(__('Deal Updated Successfully!!', true), 'message', array('class'=>'message-green'));
+				else
+					$this->Session->setFlash(__('Please Try Later!!', true), 'message', array('class'=>'message-red'));
+				$this->redirect('/admin/business_deals/manage/'.$this->request->data['BusinessDeal']['business_id'].'/');
+			}
+		}
+
+		if(($business_id != '') && ($deal_id != '')){
+			$this->BusinessDeal->recursive = -1;
+			$this->data = $this->BusinessDeal->findById($deal_id);
+		}else
+			$this->redirect('/admin/business_deals/manage/'.$business_id.'/');
+	}
+	//FUNCTION FOR EDITING A OFFER END
+
+	//FUNCTION FOR ADDING A NEW DEAL START
+	public function admin_add($business_id){
+		if(!empty($this->request->data)){ //pr($this->request->data);die;
+			$allowed_types = unserialize(ALLOWED_IMAGE_TYPES);
+			$continue = 'true';
+			$logoName = '';
+
+			//upload the image
+			if($this->request->data['BusinessDeal']['image_1']['name'] != ''){
+				if(in_array($this->request->data['BusinessDeal']['image_1']['type'], $allowed_types)){
+					$fileName = $this->Fp->uploadFile('../webroot/img/front_end/business/deals/', $this->request->data['BusinessDeal']['image_1']);
+					if($fileName != '')
+						$this->request->data['BusinessDeal']['image'] = $fileName;
+				}else{
+					$this->Session->setFlash(__('Please Upload only *.gif, *.jpg, *.png image only!', true), 'message', array('class'=>'message-red'));
+					$continue = 'false';
+				}
+			}
+			
+
+			//continue to save the data
+			if($continue == 'true'){
+				$this->request->data['BusinessDeal']['status'] = '1';
+				if($this->BusinessDeal->save($this->request->data))
+					$this->Session->setFlash(__('Deal Added Successfully!!', true), 'message', array('class'=>'message-green'));
+				else
+					$this->Session->setFlash(__('Please Try Later!!', true), 'message', array('class'=>'message-red'));
+				$this->redirect('/admin/business_deals/manage/'.$this->request->data['BusinessDeal']['business_id'].'/');
+			}
+		}
+	}
+	//FUNCTION FOR ADDING A NEW DEAL END
+
+	//FUNCTION FOR FETCHING THE BUSINESS DETAILS START
+	public function fetch_business_deals_details(){ //pr($_POST);die;
+		$this->layout = 'ajax';
+		$this->set('dealsArr', $this->BusinessDeal->findById($_POST['business_deal_id']));
+	}
+	//FUNCTION FOR FETCHING THE BUSINESS DETAILS END
+	/*---------------------------- ADMIN SECTION END ----------------------------------------*/
+
+}

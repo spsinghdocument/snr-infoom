@@ -1,0 +1,5 @@
+</html>
+<body>
+<a href="link.html">link page</a>
+</body>
+</html>

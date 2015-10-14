@@ -1,0 +1,7 @@
+<html>
+<body>
+<h1 align="center">heading</h1>
+<h1 align="right">i'm aligned to right</h1>
+<h1>default</h1>
+</body>
+</html>

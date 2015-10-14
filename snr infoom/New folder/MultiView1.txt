@@ -1,0 +1,3 @@
+MultiView1....view2 ...view...(properties...activevievIndex  0)
+
+Button1....MultiView1.SetActiveView(View2);

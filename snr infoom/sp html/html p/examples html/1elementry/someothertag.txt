@@ -1,0 +1,20 @@
+<html>
+<body>
+
+<b>we are the students of IIITM</b>
+<br>
+<big>we are the students of IIITM</big>
+<br>
+<i>we are the students of IIITM</i>
+<br>
+<strong>we are the students of IIITM</strong> 
+<br>
+<sub>we are the students of IIITM</sub>
+<br>
+<u>we are the students of IIITM</u>
+<br>
+<em>we are the students of IIITM</em>
+<br>
+<hr>we are the students of IIITM
+</body>
+</html>

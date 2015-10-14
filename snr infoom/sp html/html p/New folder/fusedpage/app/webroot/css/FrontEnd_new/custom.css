@@ -1,0 +1,51 @@
+/* Paging Start */
+.pageingBox { padding:0 35px; margin:20px auto; width:365px; height:42px; background:url(../img/pageing_bg.jpg) left no-repeat; }
+.pageingBox span { padding-top:10px; display:block; text-transform:uppercase; color:#767676; font-size:11px; }
+.pageingBox ul { list-style:none; overflow:hidden; }
+.pageingBox li { padding:1 2px; float:left; }
+.pageingBox li a.nobg, .pageingBox li a.nobg:hover { background:none; }
+.current{background: url("../img/page_hover.png") no-repeat scroll left 0 transparent; color: #FFFFFF; display: block; font-size: 11px;
+    height: 10px; padding: 10px 0 7px; text-align: center; width: 27px;}
+.pageingBox li a { padding:10px 0 7px 0; width:27px; height:10px; display:block; text-align:center; font-size:11px; color:#767676; }
+.pageingBox li a:hover, .pageingBox li a.sel { color:#fff; background:url(../img/page_hover.png) left 0px no-repeat;}
+/* Paging End */
+
+/* Custom Messages Styles start */
+.errorText{border:1px solid #ff0000; color:#960000; margin:auto; background:#e6b6b5; padding:7px; text-align:center;}
+.success{background: green; color: #FFFFFF; font-size: 11px; letter-spacing: 1px; padding: 10px; text-align: center; }
+/* Custom Messages Styles end */
+
+/* Custom CSS Start */
+.labelMsg1 { color: #000000; float: left; font-size: 13px; padding: 10px 7px 0 10px; text-align: left; width: 150px; }
+.labelMsg2 { color: #000000; float: left; font-size: 12px; padding: 10px 7px 0 10px; text-align: left; width: 110px; }
+.labelMsg3 { color: #000000; float: left; font-size: 13px; padding: 10px 7px 0 10px; text-align: left; width: 90px; }
+.inputBoxCus { background: url(../img/search_bg.gif) repeat-x scroll center top #FFFFFF; border: 1px solid #CDD2D7; color: #666666; font-size: 16px; font-weight: bold; padding: 12px 8px; width: 200px; }
+.button2 { margin: 7px 26px 0px 0; float: left; font-size: 18px; color: #fff;  font-family: 'Futura-Medium','Futura','Trebuchet MS',sans-serif; cursor: pointer; width: 108px; height: 40px; border: 0px; background: url(../img/shapeimage_26.png) no-repeat; }
+.selectBoxCus { background: url(../img/search_bg.gif) repeat-x scroll center top #FFFFFF; border: 1px solid #CDD2D7; color: #666666; font-size: 14px; font-weight: bold; padding: 12px 8px; width: 220px; }
+.selectField { width: 220px; height: 26px; border: 2px solid #c0c0c0; padding:2px;}
+.error-message{color:#FF0000;}
+
+.welcomebox_1 .line { overflow: hidden; padding-bottom: 14px; width: 100%; float: left; }
+.welcomebox_1 .line1 { overflow: hidden; padding-bottom: 14px; width: 50%; float: left; }
+.welcomebox_1 .labelMsg { color: #000000; float: left; font-size: 13px; padding: 5px 7px 0 10px; text-align: left; width: 60px; }
+.welcomebox_1 .searchInputInbox { background: url(../img/search_bg.gif) repeat-x scroll center top #FFFFFF; border: 1px solid #CDD2D7; color: #666666; font-size: 16px; font-weight: bold; padding: 12px 8px; width: 388px; }
+.welcomebox_1 textarea { background: url("../img/search_bg.gif") repeat-x scroll left top #FFFFFF; border: 1px solid #CDD2D7;
+    height: 150px; margin-left: 1px; padding: 4px 3px; width: 300px; }
+.welcomebox_1 input.button { width: 65px; font-size: 16px; height: 28px; display: block; float: left; border: 0px; margin-left: 68px; cursor: pointer; color: #fff; line-height: 28px; background: url(../img/delete-bg.png) no-repeat; }
+.payment_button{background: url("../img/postjobbg.jpg") no-repeat scroll 0 0 transparent; color: #FEFEFE; display: inline-block;   font-size: 14px; height: 28px; margin: 0 7px; padding-top: 13px; text-align: center; text-shadow: 1px 1px #B8080F; width: 162px; cursor:pointer}
+.payment_button2{background: url("../img/postjobbg_new.jpg") no-repeat scroll 0 0 transparent; color: #FEFEFE; display: inline-block;   font-size: 14px; height: 28px; padding-top: 13px; text-align: center; text-shadow: 1px 1px #B8080F; width: 100px; cursor:pointer}
+
+/*----- For POPUPS start 7/3/2012 -----*/
+#mainDivPopup{float: left; margin-left: 10px; padding: 0 19px 0 0; width: 770px;}
+#mainDivPopup fieldset{background: none repeat scroll 0 0 #FBFBFB; border: 1px solid #DDDDDD; margin: 0 0 20px; padding: 19px;}
+/*----- For POPUPS end  7/3/2012 -----*/
+
+/*----- Custom Messages Start -----*/
+.info, .message-green, .warning, .message-red, .validation {border: 1px solid; margin: 10px 0px; padding:12px 10px 12px 50px; background-repeat: no-repeat; background-position: 10px center;}
+.info {color: #00529B; background-color: #BDE5F8;}
+.message-green {color: #4F8A10; background-color: #DFF2BF; background-image: url('../../img/admin/success.png'); -moz-border-radius:5px 5px 5px 5px;}
+.warning {color: #9F6000; background-color: #FEEFB3;}
+.message-red {color: #D8000C; background-color: #FFBABA; background-image: url('../../img/admin/error.png'); -moz-border-radius:5px 5px 5px 5px;}
+/*----- Custom Messages End  -----*/
+
+/* Custom CSS End */

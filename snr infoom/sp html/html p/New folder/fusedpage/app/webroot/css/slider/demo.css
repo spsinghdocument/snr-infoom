@@ -1,0 +1,33 @@
+/* Demo CSS - You do not need this css in your own slider */
+
+#container{
+	max-width:620px;
+	margin:0 auto;
+	padding-bottom:80px;
+}
+
+#banner-fade,
+#banner-slide{
+	margin-bottom: 60px;
+}
+
+
+ul.bjqs-controls.v-centered li a:hover{
+	background:#000;
+	color:#fff;
+}
+ol.bjqs-markers li a{
+	margin:5px;
+	background:url(../../img/front_end/circle.png) no-repeat 0 -15px;
+	width:10px;
+	height:10px;
+	text-indent:-9999px;
+}
+
+ol.bjqs-markers li.active-marker a,
+ol.bjqs-markers li a:hover{
+	background:url(../../img/front_end/circle.png) no-repeat;
+	width:10px;
+	height:10px;
+}
+

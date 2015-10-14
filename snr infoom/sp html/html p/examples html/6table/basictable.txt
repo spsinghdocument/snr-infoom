@@ -1,0 +1,16 @@
+<html>
+<body>
+
+<h4>table with no borders:</h4>
+<table>
+<tr>
+  <td>abc</td>
+  <td>bca</td>
+  <td>cab</td>
+</tr>
+<tr>
+  <td>400</td>
+  <td>500</td>
+  <td>600</td>
+</tr>
+</table>

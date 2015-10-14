@@ -1,0 +1,9 @@
+User-Agent: Googlebot
+Disallow: /local/
+User-agent: *
+Disallow: /local/
+User-agent: ia_archiver
+Disallow: /
+
+sitemap: http://www.rankya.com.au/sitemap.xml
+sitemap: http://www.rankya.com.au/sitemap-images.xml

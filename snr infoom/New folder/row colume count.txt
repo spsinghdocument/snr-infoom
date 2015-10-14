@@ -1,0 +1,54 @@
+    protected void Page_Load(object sender, EventArgs e)
+......................
+    {
+        SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\saurabh.mdf;Integrated Security=True;User Instance=True");
+        SqlCommand cmd = new SqlCommand();
+        con.Open();
+        cmd = new SqlCommand("select * from state", con);
+        
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        cmd.ExecuteNonQuery();
+        con.Close();
+        da.Fill(ds);
+       
+       
+       
+        for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
+        {
+           
+            DropDownList2.Items.Add(ds.Tables[0].Columns[i].ColumnName);
+        }
+        
+        }
+
+................................................................................................................
+ protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+............................
+    {
+        
+        SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\saurabh.mdf;Integrated Security=True;User Instance=True");
+        SqlCommand cmd = new SqlCommand();
+        con.Open();
+        string str = "select " + DropDownList2.SelectedItem.ToString() + " from state";
+        cmd = new SqlCommand(str, con);
+   
+        
+       
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        cmd.ExecuteNonQuery();
+       
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+
+
+        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+        {
+            DropDownList3.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+            
+        }
+       
+       
+        
+        con.Close();
+    }

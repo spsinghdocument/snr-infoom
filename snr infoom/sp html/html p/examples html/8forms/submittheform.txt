@@ -1,0 +1,15 @@
+<html>
+<body>
+
+<form action="textareabox.html">
+ first name: 
+<input type="text" name="FirstName" value="Ram" size="20">
+<br> 
+last name: 
+<input type="text" name="LastName" value="Kumar" size="20">
+<br>
+<input type="submit" value="Submit">
+
+</form> 
+</body>
+</html>

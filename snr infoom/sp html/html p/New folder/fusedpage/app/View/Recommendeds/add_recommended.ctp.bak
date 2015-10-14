@@ -1,0 +1,8 @@
+
+<?php 
+if(!empty($CountRecommended)){
+echo $CountRecommended.' person has recommended';
+} else {
+echo '0';
+}
+?>

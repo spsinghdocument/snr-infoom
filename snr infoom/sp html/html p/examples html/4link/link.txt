@@ -1,0 +1,6 @@
+</html>
+<body>
+<a href="http://www.gmail.com/">link to gmail</a>
+<a href="http://www.gmail.com/"target="_blank">link to gmail</a>
+</body>
+</html>

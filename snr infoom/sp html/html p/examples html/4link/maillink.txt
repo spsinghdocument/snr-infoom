@@ -1,0 +1,9 @@
+<html>
+<body>
+<p align="center"><b>
+<a href="mailto:pavani@gmail.com">mail me</a><br>
+This is another mailto link:
+<a href="mailto:someone@gmail.com?cc=someoneelse@gmail.com>Send mail!</a></b>
+</p>
+</body>
+</html>

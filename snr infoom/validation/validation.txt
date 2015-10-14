@@ -1,0 +1,26 @@
+Alphanumeric with special Characters
+Minimum length 7 and Maximum length 10. Characters allowed – a - z  A - Z 0-9 ’@ & # .
+   
+ValidationExpression="^[a-zA-Z0-9'@&#.\s]{7,10}$" />
+ 
+
+
+
+Alphanumeric Only
+Minimum length 7 and Maximum length 10. Characters allowed – a - z  A - Z 0-9
+
+ValidationExpression="^[a-zA-Z0-9\s]{7,10}$" />
+ 
+
+
+Alphabets Only
+Minimum length 7 and Maximum length 10. Characters allowed – a - z  A - Z
+
+ValidationExpression="^[a-zA-Z]{7,10}$" />
+ 
+
+
+Numeric Only
+Minimum length 7 and Maximum length 10. Characters allowed – 0 - 9
+ 
+ValidationExpression="^[0-9]{7,10}$" />

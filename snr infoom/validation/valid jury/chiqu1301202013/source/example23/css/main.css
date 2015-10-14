@@ -1,0 +1,5 @@
+body{background:#eee;font-family:Verdana, Helvetica, Arial, sans-serif;margin:0;padding:0}
+.examples{background:#FFF;width:900px;font-size:80%;border:1px #000 solid;margin:3.5em auto 2em;padding:1em 2em 2em}
+.examples .example{margin-bottom:15px;border-bottom:1px solid #DDD}
+.examples .example div{margin-bottom:5px;}
+.examples .example .result {margin-left:10px;}

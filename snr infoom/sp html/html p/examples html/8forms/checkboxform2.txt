@@ -1,0 +1,14 @@
+<html>
+<body>
+<form>
+IPG-2007:
+<input type="checkbox" name="ipg2007">
+<br />
+IPG-2008: 
+<input type="checkbox" name="ipg2008">
+<br />
+IPG-2006: 
+<input type="checkbox" name="ipg2006">
+</form>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<html>
+<body bgcolor="aqua">
+<p align="right">
+<font size="6" face="lucida handwriting"color="red">this is aligned to right.</font>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,6 @@
+ int a, b, c;
+        a = int.Parse(TextBox1.Text);
+        b = int.Parse(TextBox2.Text);
+        c = a + b;
+        TextBox3.Text = c.ToString();
+        Label1.Text = c.ToString();

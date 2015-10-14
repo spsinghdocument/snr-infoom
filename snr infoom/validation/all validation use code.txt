@@ -1,0 +1,47 @@
+    import
+using System;
+
+using System.Text.RegularExpressions;
+
+
+
+
+
+ protected void Button2_Click(object sender, System.EventArgs e)
+             ...........................
+    {
+        if (!(new Regex(@"^[0-9]{10}$")).IsMatch(TextBox2.Text))
+        {
+            Label1.Text = "number address is not valid.";
+        }
+        else
+        {
+            Label1.Text = "number address is  valid.";
+        }
+    }
+
+
+............................................................................................
+
+                   dropdounlist
+
+ if (DropDownList1.SelectedItem.ToString() == "...selec............")
+            Label2.Text = "select one";
+        else
+            Label2.Text = "submit";
+
+........................................................................................
+  if (CheckBox1.Checked)
+
+            Label2.Text = "check box selected";
+        else
+            Label2.Text = "select checkbox";
+
+
+.................................................................................
+
+  if(RadioButtonList1.SelectedValue.ToString()=="")
+
+            Label2.Text = "radio button not selected";
+        else
+            Label2.Text = "radio button selected";

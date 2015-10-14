@@ -1,0 +1,208 @@
+<html>
+<head>
+    
+    <title>validation</title>
+
+    
+
+    <script language="javascript">
+
+    
+
+        function CHIQU() {
+
+            
+            if (document.form1.name.value == "") {
+                alert("Please give the name");
+                document.form1.name.forus();
+                return false;
+            }
+
+
+            if (document.form1.email.value == "") {
+                alert("Please give the email");
+                return false;
+            }
+
+
+            if (document.form1.age.value == "") {
+                alert("Please give age");
+                document.form1.age.focus();
+                return false;
+            }
+
+
+            if (document.form1.age.value < 18 || document.form1.age.value > 60) {
+                alert("Please give Age range between 18 and 60");
+                document.form1.age.focus();
+                return false;
+            }
+
+
+            if (document.form1.gender[0].checked == false &&
+                    document.form1.gender[1].checked == false) {
+                alert("Please select gender");
+                document.form1.gender.focus();
+                return false;
+            }
+
+
+            if (document.form1.language1.checked == false &&
+                    document.form1.language2.checked == false &&
+                    document.form1.language3.checked == false) {
+                alert("Please Select your choice of language(Atleast One)");
+                return false;
+            }
+
+
+            if (document.form1.country.value == "") {
+                alert("Please give country");
+                document.form1.country.focus();
+                return false;
+            }
+
+          
+
+            if (document.form1.myaddress.value == "") {
+                alert("Please give address");
+                document.form1.myaddress.focus();
+                return false;
+            }
+
+
+            if (document.form1.u_name.value == "") {
+                alert("Please give username");
+                document.form1.u_name.focus();
+                return false;
+            }
+
+           
+
+            if (document.form1.pass.value == "") {
+                alert("Please give Password");
+                document.form1.pass.focus();
+                return false;
+            }
+
+           
+
+            if (document.form1.pass.value.lenght < 6) {
+                alert("Please give a Password more than 5 characters");
+                document.form1.pass.focus();
+                return false;
+            }
+
+            if (document.form1.r_pass.value == "") {
+                alert("Please retype your password");
+                document.form1.r_pass.focus();
+                return false;
+            }
+
+          
+
+            if ((document.form1.pass.value) != (document.form1.r_pass.value)) {
+                alert("Your password does not match");
+                document.form1.r_pass.value == "";
+                document.form1.r_pass.focus();
+                return false;
+            }
+            return( true );
+        }
+    </script>
+
+</head>
+<body>
+
+
+<form method="POST" action="" name="form1">
+
+    <table border="2" align="center" cellpadding="7">
+
+        <tr>
+            <td><strong>Name:</strong></td>
+
+            <td>
+                <!-- TextBox -->
+                <input type="text" name="name"/>
+            </td>
+           
+        </tr>
+
+        
+        <td><strong>Email:</strong></td>
+
+        <td>
+            
+            <input type="text" name="email"/>
+        </td>
+       
+        </tr>
+
+        <tr>
+            <td><strong>Age:</strong></td>
+            <td>
+               
+                <input type="text" name="age" size="2"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Gender:</strong></td>
+            <td>
+              
+                <input type="radio" name="gender" value="Male"/>Male
+                <input type="radio" name="gender" value="Female"/>Female
+
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Language:</strong></td>
+            <td>
+                
+                <input type="checkbox" name="language1" value="Hindi"/>Hindi
+                <input type="checkbox" name="language2" value="English"/>English
+                <input type="checkbox" name="language3" value="Urdu"/>Urdu
+            </td>
+        </tr>
+
+        <tr>
+            <td><strong>Country:</strong></td>
+            <td>
+                <select name="country"/>
+                <option value="" selected/>
+                --Select--
+                <option value="indi"/>
+                India
+                <option value="pakistan"/>
+                Pakistan
+                <option value="beangladesh"/>
+                Beangladesh
+                <option value="srilanka"/>
+                Srilanka
+                </select>
+            </td>
+        </tr>
+
+             
+        
+
+        
+
+        <tr align="center">
+
+            <td>
+               
+                <input type="submit" value="Submit" onClick="return (CHIQU());"/>
+            </td>
+
+            <td>
+                <input type="reset">
+            </td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>
+

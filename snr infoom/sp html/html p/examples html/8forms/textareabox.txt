@@ -1,0 +1,6 @@
+<html>
+<body>
+write the mail
+<P><TEXTAREA NAME="comment" ROWS="15" COLS="50"></TEXTAREA> 
+</body>
+</html>

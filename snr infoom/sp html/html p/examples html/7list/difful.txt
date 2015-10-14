@@ -1,0 +1,32 @@
+<html>
+<body>
+<h4>disc bullet list:</h4>
+<ul type="disc">
+ <li>ipg1</li>
+ <li>ipg2</li>
+ <li>ipg3</li>
+ <li>ipg4</li>
+  <li>ipg5</li>
+</ul>  
+
+<h4>circle bullet list:</h4>
+<ul type="circle">
+ <li>ipg1</li>
+ <li>ipg2</li>
+ <li>ipg3</li>
+ <li>ipg4</li>
+  <li>ipg5</li>
+</ul>  
+
+<h4>square bullet list:</h4>
+<ul type="square">
+ <li>ipg1</li>
+ <li>ipg2</li>
+ <li>ipg3</li>
+ <li>ipg4</li>
+  <li>ipg5</li>
+</ul>  
+
+
+</body>
+</html>

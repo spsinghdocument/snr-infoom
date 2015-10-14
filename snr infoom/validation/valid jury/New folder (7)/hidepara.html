@@ -1,0 +1,46 @@
+<html>
+<head>
+<script src="jQuery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $(".ex .hide").click(function(){
+
+    $(this).parents(".ex").hide("fast");
+     $(this).parents(".ex").show();
+  });
+});
+</script>
+<style type="text/css"> 
+div.ex
+{
+background-color:#e5eecc;
+padding:7px;
+border:solid 1px #c3c3c3;
+}
+</style>
+</head>
+<body>
+
+<h3>Software Developer</h3>
+<div class="ex">
+<button class="hide">Chhupa Lo</button>
+<p>Saurabh<br> 
+Pratap<br>
+Singh(Gazipur)</p>
+</div>
+
+<h3>Delhi NCR</h3>
+<div class="ex">
+<button class="hide">Chhupa Lo</button>
+<p>Contact:Rajnish Srivastav<br> 
+SnR Infocom, Noida<br>
+Up</p>
+</div>
+<div class="ex">
+<input type="button" value="Show" id="this">
+
+</div>
+
+</body>
+</html>

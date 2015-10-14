@@ -1,0 +1,8 @@
+<html>
+<body>
+  <h3>image of jpg format</h3>
+    <img src="images.jpg">
+   <h3>image of gif format</h3>
+    <img src="hackanm.gif">
+</body>
+</html>

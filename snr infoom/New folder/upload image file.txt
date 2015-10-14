@@ -1,0 +1,14 @@
+if (FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName != "")
+        {
+            string path = "~/images/" + FileUpload1.FileName;
+            FileUpload1.SaveAs(Server.MapPath(path));
+            Image2.ImageUrl = path;
+            Image2.Visible = true;
+            Label1.Visible = true;
+            Label1.Text = "upload the filed";
+        }
+        else
+        {
+            Label1.Visible = true;
+            Label1.Text = "filed the browser";
+        }

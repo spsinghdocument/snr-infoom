@@ -1,0 +1,59 @@
+<!-- VALIDATION ENGINE START -->
+<script type="text/javascript">	
+	$(document).ready(function(){
+		$("#NewsletterAdminSendForm").validationEngine()	
+	});	
+</script>
+<!-- VALIDATION ENGINE END -->
+
+<div class="rightMid">
+	<!-- DISPLAY MESSAGE START -->
+	<?php echo $this->Session->flash();?>
+	<!-- DISPLAY MESSAGE END -->
+	<div class="mainHd">Send Newsletter</div>
+
+	<div>
+	<?php echo $this->Form->create('Newsletter', array('action'=>'admin_send'));?>
+		<div class="formField">
+			<span>Subscribed Emails :</span>
+			<?php pr($this->Fused->fetchAllActiveSubscribedEmails()); ?>
+			<?php echo $this->Form->select('Newsletter.emails', $this->Fused->fetchAllActiveSubscribedEmails(), array('empty'=>false, 'multiple'=>true, 'size'=>10, 'class'=>'formInput validate[required]'));?>
+		</div>
+
+		<div class="formField">
+			<strong>Select All</strong> <?php echo $this->Form->checkbox('Newsletter.selectAll', array('value'=>'1', 'onchange'=>'selectAllEmails(this)'));?>
+		</div>
+
+		<div class="formField">
+			<span>Newsletter Subject :</span>
+			<?php echo $this->Form->input('Newsletter.subject', array('div'=>false, 'label'=>false, 'type'=>'text', 'class'=>'formInput validate[required]'));?>
+		</div>
+
+		<div class="formField">
+			<span>Message :</span>
+			<?php echo $this->Fck->fckeditor(array('Newsletter', 'message'), $this->Html->base, '', '70%', '450');?>
+		</div>
+
+			
+
+		<div class="norbtnmain">
+			<?php echo $this->Form->submit('Send Newsletter', array('div'=>false, 'label'=>false, 'class'=>'normalbtn'));?>
+		</div>
+		<div class="clr"></div>
+	<?php echo $this->Form->end();?>
+	</div>
+</div>
+
+<script type="text/javascript">
+function selectAllEmails(val){
+	if($(val).is(':checked')){
+		$('#NewsletterEmails option').each(function(){
+				$(this).attr('selected','selected');
+		})
+	}else{
+		$('#NewsletterEmails option').each(function(){
+				$(this).attr('selected', false);
+		})
+	}
+}
+</script>

@@ -1,0 +1,147 @@
+<html>
+<head>
+	<h2>Registration Form</h2>
+		<script type= "text/javascript">
+	function checkUserid()
+{
+if(form.userid.value == "")
+{
+	  alert("User id cannot be empty/ length be between 5 and 12");
+	  form.userid.focus();
+	  return false;
+	}
+	if(form.userid.value != "")
+{  
+if(form.userid.value.length <= 5 || form.userid.value.length >= 12)
+{
+		alert("User id cannot be empty/ length be between 5 and 12");
+		form.userid.focus();
+		return false;
+}
+}
+}
+function checkPassword()
+{
+if(form.password.value == "")
+{
+   alert("Password should not be empty/ length be between 7 and 12");
+		form.password.focus();
+		return false;
+}
+	  if(form.password.value != "")
+{
+if(form.password.value.length <= 7 || form.password.value.length >= 12)
+{
+//alert("Hello");
+		alert("Password should not be empty/ length be between 7 and 12");
+		form.password.focus();
+		return false;
+}
+	  }
+	}
+		  function checkEmail()
+{
+var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//alert("Hello");
+if((email.value==null)||(email.value=="")){
+			alert("Please Enter your Email ID!");
+			email.focus();
+			return false;
+			}
+if((email.value!=null)||(email.value!=""))
+{
+			if (re.test(form.email.value))
+{
+			return true;
+			}
+else
+{
+			alert("Please enter valid email adderess!");
+			email.focus();
+			return false;
+			}
+}
+			return false;
+
+		  }
+		  function checkName()
+{
+			var re = /^[A-Za-z]+$/;
+if(form.name.value == "")
+{
+			alert("Please Enter your Name!");
+			name.focus();
+			return false;
+}
+
+if(form.name.value != "")
+{
+			if(!(re.test(form.name.value)))
+{
+			alert("Name must have alphabet characters only!");
+			name.focus();
+			return false;
+			}
+			}
+			  return true;
+			}
+
+function checkGender()
+		{
+		if(!document.getElementsByName("**")[0].checked && !document.getElementsByName("**")[1].checked)
+		{
+		alert("Select Male/Female");
+		return false;
+		}
+		return true;
+		}
+function checkCountry()
+		{
+
+	  if(document.getElementsByName("country")[0].selectedIndex==0)
+		{
+		alert("Please select country from the list");
+		return false;  
+		}
+		return true
+		}
+
+		  function validate()
+{
+checkUserid();
+checkPassword();
+checkName();
+checkEmail();
+checkCountry();
+checkGender();
+		  }
+		</script>
+</head>
+		<form name="form" method="post" onsubmit="return validate()">
+		<pre>
+User id:			  
+<input type="text" name="userid" size="30"><br>
+Password:			  
+<input type="password" name="password" size="30"><br>
+Name:			  
+<input type="text" name="name" size="30"><br>
+Country:	
+<select name="country">
+<option value="select">(Please select a country)</option>
+		<option value="pk">Pakistan</option>
+		<option value="chn">China</option>
+		<option value="uk">United Kingdom</option>
+		<option value="usa">United States of America</option>
+<option value="ir">Iran</option>
+<option value="ma">Malaysia</option>
+		</select><br>
+Email:
+<input type="text" name="email" size="30"><br>
+Gender:
+<input type="radio" name="**" value="male">Male<br>
+<input type="radio" name="**" value="female">Female<br>
+		<input type="submit" name="submit" value="Submit">
+		</pre>
+		</form>
+
+</html>

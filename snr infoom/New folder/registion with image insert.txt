@@ -1,0 +1,71 @@
+  if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "" && TextBox7.Text != "" && TextBox8.Text != "" && RadioButtonList1.Text != "" && DropDownList1.SelectedItem.Text != "")
+        {
+            if (FileUpload1.PostedFile != null && FileUpload1.PostedFile.FileName != "")
+            {
+
+                //float a;
+                //a = float.Parse(TextBox2.Text);
+                int m = 1;
+
+                byte[] myimage = new byte[FileUpload1.PostedFile.ContentLength];
+                HttpPostedFile Image = FileUpload1.PostedFile;
+                Image.InputStream.Read(myimage, 0, (int)FileUpload1.PostedFile.ContentLength);
+                SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\saurabh.mdf;Integrated Security=True;User Instance=True");
+                SqlCommand cmd = new SqlCommand("select img_id from sp2", con);
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet dt = new DataSet();
+                da.Fill(dt);
+                if (dt.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+                    {
+                        b = int.Parse(dt.Tables[0].Rows[i][0].ToString());
+                    }
+
+
+                    m = ++b;
+
+
+                }
+               
+
+                cmd = new SqlCommand("insert into sp2 (fullname,mobileno,sex,course,address,dob,email,id,password,image,image_type,image_size,img_id) values(@fullname,@mobileno,@sex,@course,@address,@dob,@email,@id,@password,@image,@image_type,@image_size,@img_id)", con);
+                cmd.Parameters.AddWithValue("@fullname", TextBox1.Text);
+                cmd.Parameters.AddWithValue("@mobileno", double.Parse(TextBox2.Text));
+                cmd.Parameters.AddWithValue("@sex", RadioButtonList1.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@course", DropDownList1.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@address", TextBox3.Text);
+                cmd.Parameters.AddWithValue("@dob", TextBox4.Text);
+                cmd.Parameters.AddWithValue("@email", TextBox5.Text);
+                cmd.Parameters.AddWithValue("@id", TextBox6.Text);
+                cmd.Parameters.AddWithValue("@password", TextBox8.Text);
+               
+               
+                cmd.Parameters.Add("@Image", SqlDbType.Image, myimage.Length).Value = myimage;
+                cmd.Parameters.Add("@image_type", SqlDbType.VarChar, 100).Value = FileUpload1.PostedFile.ContentType;
+                cmd.Parameters.Add("@image_size", SqlDbType.BigInt, 99999).Value = FileUpload1.PostedFile.ContentLength;
+                cmd.Parameters.AddWithValue("@img_id", m);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                TextBox1.Text = string.Empty;
+                TextBox2.Text = string.Empty;
+                //RadioButtonList1.Text = string.Empty;
+                //DropDownList1.SelectedItem.Text = " ..SELECT ONE....";
+                TextBox3.Text = string.Empty;
+                TextBox4.Text = string.Empty;
+                TextBox5.Text = string.Empty;
+                TextBox6.Text = string.Empty;
+                TextBox7.Text = string.Empty;
+                TextBox8.Text = string.Empty;
+                Label1.Visible = true;
+                Label1.Text = "submitted";
+            }
+
+        }
+        else
+        {
+            Label1.Visible = true;
+
+            Label1.Text = "<font color ='Green'> plese fill all"+  Button2.AccessKey  + "</font>";
+        }

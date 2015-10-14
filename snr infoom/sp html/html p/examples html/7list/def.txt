@@ -1,0 +1,19 @@
+<HTML>
+<BODY>
+<H2 ALIGN="CENTER">SUMMER CAMPING TRIP PLANNING</H2><HR>
+<DL>
+<DT>Winter</DT>
+     <DD>Write for maps and travel brochures</DD>
+     <DD>Prepare budget and equipment list</DD>
+<DT>Spring</DT>
+     <DD>Buy essential items</DD>
+     <DD>Make reservations</DD>
+<DT>Week Before Trip</DT>
+     <DD>Have vehicle service</DD>
+     <DD>Buy traveler's cheques</DD>
+     <DD>Cancel newspaper and other deliveries</DD>
+<DT>Day before trip</DT>
+     <DD>Load vehicle</DD>
+</DL>
+</BODY></HTML>
+

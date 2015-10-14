@@ -1,0 +1,49 @@
+<html>
+<head>
+<script src="jQuery.js"></script>
+<script>
+
+
+function fun()
+{
+var a= $("#name").val();
+if(a=="")
+{
+alert("Please Enter ur Name");
+}
+}
+</script>
+</head>
+<body>
+
+<form >
+
+  First name: <input type="text" id="name" /><br><br>
+ 
+LOCATION: <!input type=" " name="fd">
+<select>
+  <option >DELHI</option>
+  <option >NOIDA</option>
+  <option >GHAZIBAD</option>
+  <option >GHAZIPUR</option>
+</select><br>
+<br>
+
+  <label for="male">Male</label>
+  <input type="radio" name="sex" id="male" value="male" />
+  <label for="female">Female</label>
+  <input type="radio" name="sex" id="female" value="female" /><br>
+  
+
+<br>CheckBox1:
+<input type="checkbox" name="condition" />
+
+CheckBox2:
+<input type="checkbox" name="condition1" /><br><br>
+
+<input type="submit" value="Submit" onclick="fun()" align="center"/>
+
+</form>
+
+</body>
+</html>

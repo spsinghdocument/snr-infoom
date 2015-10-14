@@ -1,0 +1,12 @@
+<html>
+<body>
+<form>
+<select>
+<option value="India">India</option>
+<option value="Pakistan">Pakistan</option>
+<option value="America">America</option>
+<option value="Srilanka">Srilanka</option>
+</select>
+</form>
+</body>
+</html>

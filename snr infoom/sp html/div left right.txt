@@ -1,0 +1,7 @@
+</div>
+<div style=" background-color:Green;width:100%; height:300px;">
+<div style=" background-color:Aqua;width:40%; height:100px; float:left;">saurabh</div>
+<div style=" background-color:Silver;width:20%; height:100px; float:left;">pratap</div>
+<div style=" background-color:Blue;width:40%; height:100px; float:left;">singh</div>
+
+</div>

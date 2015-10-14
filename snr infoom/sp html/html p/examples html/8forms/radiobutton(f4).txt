@@ -1,0 +1,11 @@
+<html>
+<body>
+<form >
+Student: 
+<input type="radio" name="Type" value="student">
+<br>
+Professional: 
+<input type="radio" name="Type" value="professional">
+</form>
+</body>
+</html>

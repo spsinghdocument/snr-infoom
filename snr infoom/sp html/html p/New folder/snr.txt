@@ -1,0 +1,5 @@
+Control Panel Login URL	: http://snrinfocom.com/cpanel
+(Optional Login URL)	: http://ajag.globedns.com/cpanel
+Control Panel User Name	: snrinfoc
+Control Panel Password	: p050oRf0iC
+Helpful Tip :

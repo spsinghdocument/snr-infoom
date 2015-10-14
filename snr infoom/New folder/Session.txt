@@ -1,0 +1,56 @@
+ protected void Button1_Click(object sender, EventArgs e)
+                ............
+    {
+        Session["name"] = TextBox1.Text;
+      
+        Session["gen"] = RadioButtonList1.Text;
+        Session["con"] = DropDownList1.SelectedItem.Text;
+        Response.Redirect("Default4.aspx");
+        
+    }
+
+
+
+..........................transfer...........................
+
+ protected void Page_Load(object sender, EventArgs e)
+           ..............
+    {
+        TextBox1.Text = Session["name"].ToString();
+        Label2.Text = Session["gen"].ToString();
+        RadioButton1.Text = Session["con"].ToString();
+
+    }
+
+
+..............................................use database .....................................................................................................
+
+ SqlConnection con = new SqlConnection("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True;User Instance=True");
+        con.Open();
+
+
+        SqlCommand cmd = new SqlCommand(" SELECT * FROM sp2 where firstname='gg' ", con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        if (ds.Tables[0].Rows.Count >= 1)
+        {
+            DataRow dr = ds.Tables[0].Rows[0];
+           Label1.Text = dr[0].ToString();
+            Session["lbl1"]=Label1.Text;
+  }
+        
+        con.Close();
+        Response.Redirect("Default4.aspx");
+
+..........................transfer........................
+
+Label2.Text = Session["lbl1"].ToString();
+
+..................................................image..........................................................................................................
+ 
+ Label6.Text = dr[6].ToString();
+            Image1.ImageUrl = "~/Handler.ashx?id=" + Label6.Text;
+            Session["sp"] = Image1.ImageUrl;
+...................................trasfer..................................
+    Image1.ImageUrl = Session["sp"].ToString();

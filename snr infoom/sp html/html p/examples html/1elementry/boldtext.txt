@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>iiitm</title>
+</head>
+<body>
+<b>ATAL BIHARI VAJPAYEE
+INDIAN INSTITUTE OF INFORMATION
+TECHNOLOGY AND MANAGEMENT GWALIOR</b>
+</body>
+</html>

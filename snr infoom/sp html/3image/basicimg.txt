@@ -1,0 +1,8 @@
+<html>
+<body>
+  <h3>image from same folder</h3>
+    <img src="images.jpg">
+   <h3>image from different folder</h3>
+    <img src="D:\examples html\6table\images1.jpg"alt="not displayed">
+</body>
+</html>

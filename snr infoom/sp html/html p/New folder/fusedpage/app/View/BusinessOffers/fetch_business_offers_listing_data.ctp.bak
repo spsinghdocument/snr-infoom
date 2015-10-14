@@ -1,0 +1,70 @@
+<?php echo $this->Html->script('rating/jRating.jquery');?>
+<?php 
+	if(!empty($offersArr)){
+		foreach($offersArr as $offer){ //pr($offer);
+			$usrRate = $this->Fused->validateOfferDealRating($offer['BusinessOffer']['id'], 'offer_id');
+			$offerImage = 'front_end/business/noimage.jpg';
+			if($offer['BusinessOffer']['title'] != ''){
+				$offerImagePath = '../webroot/img/front_end/business/offers/'.$offer['BusinessOffer']['image'];
+				if(is_file($offerImagePath))
+					$offerImage = 'front_end/business/offers/'.$offer['BusinessOffer']['image'];
+			}
+?>
+
+<h8><?php echo $offer['BusinessOffer']['name'];?></h8>
+<div class="deshlistbox">
+	<div class="offermain">
+		<div class="offermgbox">
+			<a href="javascript:void(0);"><?php echo $this->Image->resize($offerImage, 59, 59, array('alt'=>''));?></a>
+		</div>
+		<div class="edittext">
+			<?php /*if($this->Fused->validateUserForBusiness() == $offer['BusinessOffer']['business_id']){*/
+				if($this->Fused->validateUserForBusiness($offer['BusinessOffer']['business_id']) == 'true'){
+			?>
+				<a href="javascript:void(0);"><?php echo $this->Html->image('front_end/edit_icon.png', array('alt'=>''));?> Edit</a>
+			<?php } ?>
+		</div>
+	</div>
+
+	<div class="deshboarlistfrbox">
+		<!-- RATING SECTION START --> 
+		<?php  //pr($offer['BusinessOffer']);die;
+			$offerRating = $offer['BusinessOffer']['rating'];
+			if($offerRating == '0.0'){
+				$offerRating = '0';
+			}
+		?>
+		<div class="exemple" style="float:right;">
+			<?php
+				$offerClass = 'exemple5';
+				if($usrRate != '')
+					$offerClass = 'exempleDis';
+			?>
+			<div id="rating_<?php echo $offer['BusinessOffer']['id'];?>" class="<?php echo $offerClass;?>" data="<?php echo $offerRating;?>_5"></div>
+		</div>
+		<!-- RATING SECTION END -->
+
+		<div class="offeritemfltext" style="width:210px;">
+			<div class="busnissimgfrhd">
+				<a href="javascript:void(0);"><?php echo $offer['BusinessOffer']['title'];?></a>
+			</div>
+		</div>
+		<div class="clr"></div>
+
+		<div class="offeritemfltext">
+			<div class="deshboardbluetext">
+				<?php echo $this->Text->truncate($offer['BusinessOffer']['description'], 150, array('ending'=>'...', 'html'=>true, 'exact'=>true));?>
+			</div>
+		</div>
+		<div class="offeritemflbutton">$<?php echo $offer['BusinessOffer']['price']?></div>
+		<div class="clr"></div>
+	</div>					
+	<div class="clr"></div>
+
+	
+</div>
+<?php } ?>
+
+<?php }else{ 
+	echo 'Complete';
+}?>

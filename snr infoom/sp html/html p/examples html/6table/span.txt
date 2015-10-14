@@ -1,0 +1,34 @@
+<html>
+<body>
+
+<h4>Cell that spans two columns:</h4>
+<table border="1">
+<tr>
+  <th>Name</th>
+  <th colspan="2">color</th>
+</tr>
+<tr>
+  <td>pavani</td>
+  <td>red</td>
+  <td>black</td>
+</tr>
+</table>
+
+<h4>Cell that spans two rows:</h4>
+<table border="1">
+<tr>
+  <th>name</th>
+  <td>pavani</td>
+</tr>
+<tr>
+  <th rowspan="2">color</th>
+  <td>red</td>
+</tr>
+<tr>
+  <td>black</td>
+</tr>
+</table>
+
+</body>
+</html>
+

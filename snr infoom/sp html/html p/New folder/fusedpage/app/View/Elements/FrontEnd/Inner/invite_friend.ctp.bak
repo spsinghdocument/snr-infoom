@@ -1,0 +1,4 @@
+<div class="btnimage fr" style="margin-top:10px; margin-right:60px;">
+<?php echo '+++++++++'.$this->Session->read('Auth.User.User.id')."<br>"; ?>
+		<a onclick="return validate_business_post();" href="<?php echo SITE_PATH ;?>invites/invite_friends/" target="_blank"><span>Invite Friend</span></a>
+</div>

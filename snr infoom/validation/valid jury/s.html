@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<script src="/jquery/jquery.js"></script>
+<script src="/jquery/jquery.validate.js"></script>
+<script>
+$(document).ready(function(){
+    $("#commentForm").validate({
+    
+    rules: {
+    	name: {
+    		required: true,
+    		minlength: 2
+    	}
+		,job: {
+			required: true
+		}
+    	,otherjob: {
+    		required: function(element) {
+				return $("#cjob").val() == 'other'
+			}
+		}
+    },
+    messages: {
+    	name: {
+    		required: "Stand up for your comments or go home.",
+    		minlength: jQuery.format("You need to use at least {0} characters for your name.")
+    	}
+		,job: "You must select a job."
+		,otherjob: "If you select 'other' for a job, you must enter it."
+    }
+    
+    });
+});
+
+</script>
+</head>
+
+<body>
+
+<form id="commentForm" method="get" action="">
+ <fieldset>
+   <legend>A simple comment form with submit validation and default messages</legend>
+   <p>
+     <label for="cname">Name</label>
+     <em>*</em><input id="cname" name="name" size="25" />
+   </p>
+   <p>
+     <label for="cjob">Job</label>
+     <em>*</em><select id="cjob" name="job">
+	 <option value="">Select a Job</option>
+	 <option value="1">Jedi</option>
+	 <option value="2">Annoying Droid</option>
+	 <option value="3">Bad Guy</option>
+	 <option value="other">Other (Enter Below)</option>
+	 </select>
+   </p>   
+   <p>
+     <label for="cother">Other Job:</label>
+     <input id="cother" name="otherjob" size="25" />
+   </p>
+   <p>
+     <input class="submit" type="submit" value="Submit"/>
+   </p>
+ </fieldset>
+ </form>
+
+
+</body>
+</html>

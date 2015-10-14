@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>iiitm</title>
+</head>
+<body bgcolor=yellow>
+<marquee>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<h1>
+ATAL BIHARI VAJPAYEE
+</marquee>
+</body>
+</html>

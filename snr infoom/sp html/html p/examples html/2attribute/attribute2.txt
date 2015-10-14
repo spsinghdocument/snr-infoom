@@ -1,0 +1,8 @@
+<html>
+<body bgcolor="aqua">
+<p align="right">
+this is aligned to right.
+
+</p>
+</body>
+</html>

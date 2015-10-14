@@ -1,0 +1,29 @@
+<html>
+<body>
+<h3>with background color</h3>
+
+<table border="1"bgcolor="blue">
+<tr>
+  <td>one one</td>
+  <td>one two</td>
+</tr>
+<tr>
+  <td>two one</td>
+  <td>two two</td>
+</tr>
+</table>
+<br>
+</br>
+<h3>with background image</h3>
+<table border="1"background="images1.jpg">
+<tr>
+  <td>one one</td>
+  <td>one two</td>
+</tr>
+<tr>
+  <td>two one</td>
+  <td>two two</td>
+</tr>
+</table>
+</body>
+</html>

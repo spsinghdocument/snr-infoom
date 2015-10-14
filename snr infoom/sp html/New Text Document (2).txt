@@ -1,0 +1,16 @@
+<embed src="helloworld.swf">
+<object width="400" height="400" data="helloworld.swf">
+..................................................................................
+<h4>Object with align="right"):</h4>
+<p>This is some text. <object width="200" height="200" align="right" data="helloworld.swf"></object> This is some text.</p>
+<p>This is some text. This is some text.</p>
+.............................................................................
+align	top
+bottom
+middle
+left
+right
+..............................................
+<object width="200" height="200" data="helloworld.swf" border="5"></object>
+.........................................................................................
+

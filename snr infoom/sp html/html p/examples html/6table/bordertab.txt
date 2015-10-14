@@ -1,0 +1,35 @@
+<html>
+<body>
+
+<h4>table with no borders:</h4>
+<table border="0">
+<tr>
+  <td>abc</td>
+  <td>bca</td>
+  <td>cab</td>
+</tr>
+<tr>
+  <td>400</td>
+  <td>500</td>
+  <td>600</td>
+</tr>
+</table>
+<br>
+</br>
+<table border="1">
+<caption>tablecaption</caption>
+<tr>
+<th>alph</th>
+  <td>abc</td>
+  <td>bca</td>
+  <td>cab</td>
+</tr>
+<tr>
+<th>numb</th>
+  <td>400</td>
+  <td>500</td>
+  <td>600</td>
+</tr>
+</table>
+</body>
+</html>

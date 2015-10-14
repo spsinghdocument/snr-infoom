@@ -1,0 +1,227 @@
+<?php 
+	if(!empty($dealsArr)){
+		foreach($dealsArr as $deal){ //pr($deal);die;
+?>
+
+	<div class="Eventbox">
+		<div class="Eventhd"><a href="#"><?php echo $deal['GroupEvent']['title']; ?></a><span><?php echo date('d M, Y', strtotime($deal['GroupEvent']['start_date']));?></span></div>
+		<p><?php echo $deal['GroupEvent']['description']; ?></p>
+		<div class="readmore"><a href="#">Read more...</a></div>
+		
+	<div class="clr"></div>
+
+	<!-- EDIT DELETE SECTION START -->
+	<?php if($this->Fused->validateUserForGroup($deal['GroupEvent']['group_id']) == $this->Session->read('Auth.User.User.id')){?>
+	<div class="edittext" style="text-align:left;">
+		<a title="Edit" href="javascript:void(0);" style="float:left;" onclick="return validateEventsTabs('edit', '<?php echo $deal['GroupEvent']['id'];?>')"><?php echo $this->Html->image('front_end/edit_icon.png', array('alt'=>'', 'style'=>'cursor:pointer;',   ));?></a>
+		<!-- **************** -->
+		<a title="Delete" href="javascript:void(0);" style="float:left; margin-left:10px;" onclick="return deleteGroupEvent('<?php echo $deal['GroupEvent']['id'];?>');"><?php echo $this->Html->image('admin/delete_icon.gif', array('alt'=>'', 'style'=>'cursor:pointer;',   ));?><!-- <img alt="" src="/fusedpage/img/admin/delete_icon.gif/"> --></a>
+	</div>
+	<div class="clr"></div>
+	<?php } ?>
+	<!-- EDIT DELETE SECTION END   -->
+
+	<!-- COMMENT & RECOMMENDETION START -->
+
+	<div class="deshboardwhitebox">
+<!-- Recommended Start -->
+
+				<div class="likeboxfl" id="event_image1_<?php echo $deal['GroupEvent']['id']; ?>">	
+				<?php
+				$UserImageArr = $this->Fused->fetchEventUserImage($deal['GroupEvent']['id']);
+				foreach($UserImageArr as $UserImage){
+				$businessImage = 'front_end/business/noimage.jpg';
+				if($UserImage['User']['image'] != ''){
+					$imageRealPath = '../webroot/img/front_end/users/profile/'.$UserImage['User']['image'];
+					if(is_file($imageRealPath))
+						$businessImage = 'front_end/users/profile/'.$UserImage['User']['image'];
+						
+				} ?>
+				<?php echo $this->Image->resize($businessImage, 32, 32, array('alt'=>'')).' '; ?>
+				<?php } ?>
+				</div>
+<?php $countRecommended = $this->Fused->fetchEventRecommended($deal['GroupEvent']['id']);?>
+<?php $countUserImage = $this->Fused->fetchUserEvent($deal['GroupEvent']['id'],$this->Session->read('Auth.User.User.id')); ?>
+				<div class="likeboxfr">
+				<?php if($countUserImage < 1){ ?>
+				<span id="event_like_<?php echo $deal['GroupEvent']['id']; ?>">
+					<?php echo $this->Html->image('front_end/like_icon.jpg', array('alt'=>'', 'style'=>'cursor:pointer;', 'onclick'=>'eventrecommended('.$deal['GroupEvent']['id'].'), eventrecommendedImage('.$deal['GroupEvent']['id'].', '.$this->Session->read('Auth.User.User.id').');'));?>
+				</span>
+				<?php } ?>
+					<span id="event_recommended_<?php echo $deal['GroupEvent']['id'];?>"> <?php if($countRecommended > 0){ echo $countRecommended; } else { echo '0'; } ?> People</span> recommended this
+				</div>
+				<span id="event_roller1_<?php echo $deal['GroupEvent']['id'];?>"></span>
+				<div class="clr"></div>
+<!-- Recommended End -->
+
+		<div class="coomentlinbox">
+			<div class="commentfltext"><!-- <span>3  People </span>you know recommended this --></div>
+			<div class="commentfrlink"><a href="javascript:void(0);">Recommend</a></div>
+			<div class="clr"></div>
+		</div>
+
+<!-- Comment Start -->
+				<div class="coomentlinbox" id="event_comment_div_<?php echo $deal['GroupEvent']['id'];?>" style="border:none;">
+				<?php $commentArr = $this->Fused->fetchEventComments($deal['GroupEvent']['id']); ?>
+				<?php if(!empty($commentArr)){
+				foreach($commentArr as $comment){
+				$businessImage = 'front_end/business/noimage.jpg';
+				if($comment['User']['image'] != ''){
+					$imageRealPath = '../webroot/img/front_end/users/profile/'.$comment['User']['image'];
+					if(is_file($imageRealPath))
+						$businessImage = 'front_end/users/profile/'.$comment['User']['image'];
+						
+				}
+				?>
+				<table id="event_<?php echo $comment['EventComment']['id'];?>" style="width:100%; background-color:#F2F2F2; border-bottom:1px solid #FFFFFF;">
+				<tr>
+					<td style="width:10%"><?php echo $this->Image->resize($businessImage, 32, 32, array('alt'=>''));?></td>
+
+					<td><?php echo $comment['EventComment']['comment']; ?>
+					<?php if($this->Session->read('Auth.User.User.id') == $comment['EventComment']['user_id']){ ?>
+					<div class="listboxbg"><span style="float:right; margin-top:-10px;" id="delete_comment_<?php echo $comment['EventComment']['id'];?>"><a href="javascript:void(0);" title="Delete" onclick="return deleteEventComment('<?php echo $comment['EventComment']['id'];?>');"><?php echo $this->Html->image('front_end/delete.png', array('alt'=>''));?></a></span></div>
+					<?php } ?>
+					</td>
+
+				</tr>
+				</table>
+				<?php } } ?>
+				</div>
+				<span id="event_roller_<?php echo $deal['GroupEvent']['id'];?>"></span>
+<!-- Comment End -->
+
+		<div>
+			<div class="commentflimg">
+				<?php 
+					//PROFILE AVATAR START
+						if($this->Session->read('Auth.User.User.gender') == '1')
+							$avatar = 'front_end/users/male.jpg';
+						else
+							$avatar = 'front_end/users/female.jpg';
+
+						if(($this->Session->read('Auth.User.User.image')) != ''){
+								$realPath = '../webroot/img/front_end/users/profile/'.$this->Session->read('Auth.User.User.image');
+							if(is_file($realPath)){
+								$avatar = 'front_end/users/profile/'.$this->Session->read('Auth.User.User.image');
+							}
+						}
+
+						echo $this->Image->resize($avatar, 32, 32, array('alt'=>''));
+					//PROFILE AVATAR END
+					?>
+			</div>
+			<div class="offcommentbox">
+				<div class="offcommetarrow"><?php echo $this->Html->image('front_end/comment_arrow.jpg', array('alt'=>''));?></div>
+				<textarea name="event_comment" id="event_comment_<?php echo $deal['GroupEvent']['id'];?>" cols="" rows="" class="offcommentfrbox" style="resize:none;"></textarea>
+			</div>
+			<div class="clr"></div>
+		</div>
+		<div class="clr"></div>
+
+		<input type="hidden" id="event_<?php echo $deal['GroupEvent']['id'];?>" value="<?php echo $deal['GroupEvent']['id'];?>" >
+
+		<div class="pstbtn" onclick="saveEventComment('<?php echo $deal['GroupEvent']['id'];?>');"><?php echo $this->Form->submit('front_end/post_btn.png', array('div'=>false));?></div>
+	</div>
+
+	<!-- COMMENT & RECOMMENDETION END -->
+
+	
+</div>
+<?php } } else{ ?>
+<div class="deshlistbox" style="text-align:center; color:#FF0000; margin-top:50px;">
+	No Events Available!!
+</div>
+<?php } ?>
+
+
+<script language="text/javascript">
+function saveEventComment(event_id){
+	var comment = $('#event_comment_'+event_id).val();
+	var event_id = $('#event_'+event_id).val();
+	var user_id = "<?php echo $this->Session->read('Auth.User.User.id'); ?>";
+	if(comment != ''){
+		$.ajax({
+				type: "POST",
+				url: "<?php echo SITE_PATH.'group_events/saveComment/';?>",
+				data: "event_id="+event_id+"&user_id="+user_id+"&comment="+comment,
+				beforeSend:function(){
+					var bSend = '<?php echo $this->Html->image("ajax/small-facebook.gif", array("alt"=>"", "style"=>"margin-left:150px;"));?>';
+					$('#event_roller_'+event_id).html(bSend);
+				},
+				success: function(response){
+						$('#event_roller_'+event_id).html('');
+						$('#event_comment_'+event_id).val('');
+						
+						$('#event_comment_div_'+event_id).append(response);
+						
+					}
+			});
+	}
+}
+
+function deleteEventComment(comment_id){
+	if(comment_id != ''){
+		var conf = confirm("Do you want to delete this Comment?");
+		if(conf == true){
+			//send Ajax for Deleting Start
+			$.ajax({
+				type: "POST",
+				url: "<?php echo SITE_PATH.'group_events/delete_event_comment/';?>",
+				data: "comment_id="+comment_id,
+				beforeSend:function(){
+					var bSend = '<?php echo $this->Html->image("ajax/small-facebook.gif", array("alt"=>""));?>';
+					$('#event_roller_'+comment_id).html(bSend);
+				},
+				success: function(response){
+					if(response == 'deleted'){
+						$('#event_roller_'+comment_id).html('');
+						$('#event_'+comment_id).html('');
+						$('#event_'+comment_id).hide();
+					}
+				}
+			});
+			//send Ajax for Deleting End
+		}
+	}
+}
+
+
+function eventrecommended(event_id){
+var user_id = "<?php echo $this->Session->read('Auth.User.User.id'); ?>";
+	if(user_id != ''){
+		$.ajax({
+				type: "POST",
+				url: "<?php echo SITE_PATH.'group_events/add_recommended/';?>",
+				data: "event_id="+event_id+"&user_id="+user_id,
+				beforeSend:function(){
+					var bSend = '<?php echo $this->Html->image("ajax/small-facebook.gif", array("alt"=>""));?>';
+					$('#event_roller1_'+event_id).html(bSend);
+				},
+				success: function(response){
+						$('#event_roller1_'+event_id).html('');
+						$('#event_recommended_'+event_id).html(response);
+						$('#event_like_'+event_id).hide();
+						
+				}
+			});
+	}
+}
+
+function eventrecommendedImage(event_id, user_id){
+	if(user_id != ''){
+		$.ajax({
+				type: "POST",
+				url: "<?php echo SITE_PATH.'group_events/fetch_user_image/';?>",
+				data: "event_id="+event_id+"&user_id="+user_id,
+				beforeSend:function(){
+					var bSend = '<?php echo $this->Html->image("ajax/small-facebook.gif", array("alt"=>""));?>';
+				},
+				success: function(response){
+						$('#image_'+event_id).html('');
+						$('#event_image1_'+event_id).append(response);
+				}
+			});
+	}
+}
+</script>
+

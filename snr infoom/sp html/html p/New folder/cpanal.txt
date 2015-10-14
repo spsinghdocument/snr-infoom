@@ -1,0 +1,33 @@
+
+Domain Name Setup	: snrinfocom.com
+Total Storage	: UNLIMITED
+Server Data Transfer	: UNLIMITED
+E-mail & Webmail Access	: ACTIVATED
+My-SQL Database Access	: ACTIVATED
+Softaculous (Script Installer)	: ACTIVATED
+RVSiteBuilder (Website Builder Software)	: ACTIVATED
+All Hosting Features & Add-ons	: ACTIVATED
+Account Billing Cycle	: Annually
+Account Next Due Date	: 29/05/2014
+Web Server OS	: LINUX CentOS 6.2 (64bit)
+
+NOTE : There are no set limits on the disk space or data transfer (bandwidth) that we provide in plans marked "UNLIMITED". Still, we do need to be sure that we're providing all of our customers with optimum service. As such, we do require all customers to be fully compliant with our Terms of Service and utilize disk space and bandwidth related to the normal operation of a personal or small business website, read more...
+
+_Control Panel (cPanel) Information
+Control Panel Login URL	: http://snrinfocom.com/cpanel
+(Optional Login URL)	: http://ajag.globedns.com/cpanel
+Control Panel User Name	: snrinfoc
+Control Panel Password	: p050oRf0iC
+Helpful Tip :
+From your web based control panel you can administer many features pertaining to your site like Mail, File Manager, etc. For Security Reasons Go To Change Password inside The Control Panel and Change the Control Panel Password.
+
+_File Transfer Protocol (FTP) Information
+FTP Host Name	: ftp.snrinfocom.com or 108.161.132.15
+FTP User Name	: snrinfoc
+FTP Password	: p050oRf0iC
+FTP Port	 : 21
+Home Directory	: public_html
+Preview URL	: http://108.161.132.15/~snrinfoc
+FTP Software Video Tutorials	 : https://www.unlimitedgb.com/tutorials.html
+Helpful Tip :
+Please put your website files inside the home directory (public_html). For Security Reasons Go To FTP Accounts inside The Control Panel to change the FTP Password. You will need an FTP program like FileZilla in order to upload your files or Use the file Manager on your Control Panel.

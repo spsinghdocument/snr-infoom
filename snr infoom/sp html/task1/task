@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style type="text/css">
+p {margin-left:20px;}
+body {background-image:url("image/12.jpg");}
+</style>
+
+<title>WORLD TOURISM</title>
+
+</head>
+<body>
+<table width="967" height="900" border="0"  cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td width="203" height="83" background="image/lord_buddha.jpg">&nbsp;</td>
+    <td colspan="5" height="83" background="image/main_pic.jpg">&nbsp;</td>
+    <td width="203" height="83"background="image/nepal-monks.jpg">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="21" background="image/10.gif">&nbsp;</td>
+    <td width="110" align="center" background="image/fish-farms-12631.jpg"><b>HOME</b></td> 
+    <td width="102"  align="center" background="image/fish-farms-12631.jpg"><b>TOUR PROGRAM</b></td>
+    <td width="108"  align="center" background="image/fish-farms-12631.jpg"><b>TOURIST REGISTRATION</b></td></td>
+    <td width="100"  align="center" background="image/fish-farms-12631.jpg"><b>WORLD MAP</b></td>
+    <td width="105"  align="center"background="image/fish-farms-12631.jpg"><b>WORLD INFORMATION</b></td>
+    <td height="41" background="image/10.gif">&nbsp;</td>
+  </tr>
+  <tr>
+    <td rowspan="2" background="image/SeracClimbing.jpg">
+	<b><font color="red" >
+        <u><h4>ADVENTURES TRIP<h4></u></b>
+        <b><font color="black">
+	<b><p>MOUNT EVEREST</p></b>
+	<p><b>DAULAGIRI</b></p>
+	<p><b>KANCHENJUNGA</b></p>
+	<p><b>AANNAOURNA</b></p>
+	<b><p>MAKALU</p></b>
+	<p><b>CHO_OYU</b></p>
+	<p><b>LHOTSE</b></p>
+	<p><b>LANGTANG</b></p>
+	</td>
+    <td height="47" colspan="5" background="image/background.png">
+	<td rowspan="2" background="image/bici_muzelle_1_piccola.JPG"><b><h3>Mountain Biking</h3></b>
+	      <p><b>Bunjee Jumping</b></p>
+  	      <p><b>Peak Climbing</b></p>
+	      <b><p>National Park</p></b>
+  	      <P><b>Wildlife Reserve</p></b>
+  	      <P><b>Mountain Flight</b></p>
+	      <P><b>River Rafting</P></b> 
+		 
+	&nbsp;
+  </tr>
+  <tr>
+    <td colspan="5" rowspan="2" background="image/everest1.jpg">           
+	<b><h1><font color="red" align="centre"><u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome To World Tourism</u></h1></b></font>
+<p><font color="black" ><b>World is a common name for the whole of human civilization, specifically human experience, history, or the human condition in general, worldwide, i.e. anywhere on Earth.In a philosophical context it may refer to:
+   1. the whole of the physical Universe, or
+   2. an ontological world (see world disclosure).
+In a theological context, world usually refers to the material or the profane sphere, as opposed to the celestial, spiritual, transcendent or sacred. The "end of the world" refers to scenarios of the final end of human history, often in religious contexts.World history is commonly understood as spanning the major geopolitical developments of about five millennia, from the first civilizations to the present.World population is the sum of all human populations at any time; similarly, world economy is the sum of the economies of all societies (all countries), especially in the context of globalization. Terms like world championship, gross world product, world flags etc. also imply the sum or combination of all current-day sovereign states.In terms such as world religion, world language, and world war, world suggests international or intercontinental scope without necessarily implying participation of the entire world.</b></font></p>    
+   &nbsp;<br><br>    
+   </td>
+</tr>
+ <tr>
+    <td height="316" background="image/tess+157.jpg "><p><b><u><font color="green" >TEMPLES</font></u></b></p>
+	<FONT COLOR="PINK">
+        <p><font color="darkblue" >AKSHARDHAM</p>
+	<p><font color="darkblue" >BALAJI</p></font>
+	<p><font color="darkblue" >PASHUPATINATH</p></font>
+	<p><font color="darkblue" >SWAYAMBHUNATH</p></font>
+	<p><font color="darkblue" >HANUMAN DHOKA</p></font>
+	<p><font color="darkblue" >RAM JANKI</p></font>
+	<p><font color="darkblue" >BODHNATH STUPA</p></font>
+	<p><font color="darkblue" >LUMBINI</p>
+	
+	<td background="image/23.jpg"></FONT>
+            <P><b><a href="file:///home/saurabh/Desktop/SK/entertain.html"><font color="yellow"><u>Entertainment</u></a></b></P></font>
+	    <P><b><font color="yellow">River Rafting</P></b></font> 	
+  	     <P><b><font color="yellow">Resturants</b></P></font>&nbsp;</td>&nbsp;</td>    
+  </tr>
+  <tr>
+    <td background="image/background.png" height="41">&nbsp;</td>
+    <td colspan="5" background="image/background.png" ALIGN="CENTER"><u>CONTACT US</A>&nbsp;</td>
+    <td BACKGROUND="image/background.png">&nbsp;</td>
+  </tr></font>
+</table>
+</body>
+</html>

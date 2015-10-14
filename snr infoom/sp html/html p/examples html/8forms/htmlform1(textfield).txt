@@ -1,0 +1,16 @@
+<html>
+<body>
+
+<form> 
+name :
+<input type="text" name="name of person">
+<br>
+address: 
+<input type="text" name="address of person">
+<br>
+contact no.  :
+<input type="text" name="contact no. of person">
+</form>
+
+</body>
+</html>

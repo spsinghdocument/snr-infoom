@@ -1,0 +1,29 @@
+<html>
+<body>
+<h3>without cellspacing</h3>
+
+<table border="1">
+<tr>
+  <td>one one</td>
+  <td>one two</td>
+</tr>
+<tr>
+  <td>two one</td>
+  <td>two two</td>
+</tr>
+</table>
+<br>
+</br>
+<h3>with cellspacing</h3>
+<table border="1"cellspacing="10">
+<tr>
+  <td>one one</td>
+  <td>one two</td>
+</tr>
+<tr>
+  <td>two one</td>
+  <td>two two</td>
+</tr>
+</table>
+</body>
+</html>

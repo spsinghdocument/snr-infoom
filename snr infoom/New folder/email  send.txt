@@ -1,0 +1,32 @@
+using System.Net;
+using System.Net.Mail;
+
+
+
+
+
+MailMessage msg = new MailMessage();
+        msg.From = new MailAddress(TextBox1.Text,"sender'names");
+        msg.To.Add(new MailAddress(TextBox3.Text));
+        msg.Subject = TextBox4.Text;
+        msg.Body = TextBox5.Text;
+        msg.IsBodyHtml = true;
+        if (FileUpload1.HasFile)
+        {
+            msg.Attachments.Add(new Attachment(FileUpload1.PostedFile.InputStream, FileUpload1.FileName));
+        }
+        SmtpClient smtp = new SmtpClient();
+        smtp.Host = "smtp.gmail.com";
+        
+        smtp.Credentials = new NetworkCredential(TextBox1.Text, TextBox2.Text);
+        Label1.Visible = true;
+        smtp.EnableSsl = true;
+        try
+        {
+            smtp.Send(msg);
+            Label1.Text = "Email Sent successfully";
+        }
+        catch (Exception ex)
+        {
+            Label1.Text= ex.Message;
+        }

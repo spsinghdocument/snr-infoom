@@ -1,0 +1,14 @@
+<html>
+<body>
+
+<fieldset>
+<legend>
+student information:
+</legend>
+<form>
+name <input type="text" size="3">
+class <input type="text" size="3">
+</form>
+</fieldset>
+</body>
+</html>
